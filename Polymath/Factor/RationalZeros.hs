@@ -14,7 +14,7 @@ isFactorOf :: Integral a => a -> a -> Bool
 isFactorOf x n = n `mod` x == 0
 
 factorList n = let an = abs n
-               in  filter (`isFactorOf` an) [1 .. an `div` 2]
+               in  an : filter (`isFactorOf` an) [1 .. an `div` 2]
 
 possibleZeros' :: Integral a => [a] -> Operation
 possibleZeros' p = opZeros (possibleZeros p) (realZeros p)
@@ -37,3 +37,7 @@ firstZero p = if null p
 
 zeroRem :: Integral a => [a] -> Ratio a -> Bool
 zeroRem p d = (0 % 1) == syntheticRem p d
+
+main = do
+  print $ factorList 15
+  print $ factorList (negate 2)
