@@ -16,18 +16,16 @@ isFactorOf x n = n `mod` x == 0
 factorList n = let an = abs n
                in  filter (`isFactorOf` an) [1 .. an `div` 2]
 
---abs n | n < 0 = -n | otherwise = n
-
 possibleZeros' :: Integral a => [a] -> Operation
 possibleZeros' p = opZeros (possibleZeros p) (realZeros p)
 
 possibleZeros :: Integral a => [a] -> [Ratio a]
 possibleZeros poly =
   if null poly
-  then let p = factorList $ head poly
+  then []
+  else let p = factorList $ head poly
            q = factorList $ last poly
        in nub $ concatMap (\e -> concatMap (\f -> [f % e, negate (f % e)]) q) p
-  else []
 
 realZeros :: Integral a => [a] -> [Ratio a]
 realZeros p = filter (zeroRem p) (possibleZeros p)

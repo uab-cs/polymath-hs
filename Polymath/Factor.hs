@@ -1,6 +1,5 @@
 module Polymath.Factor
   ( factor'
-  , factor
   ) where
 
 import Polymath.Data
@@ -22,7 +21,7 @@ findZeros' p i =
 factor' :: Integral a => [a] -> Response
 factor' p =
   Response { steps = ruleOfSigns' p : findZeros' p (totalZeros p)
-           , roots = map ratioToFrac (factor p)
+           , roots = map ratioToFrac (realZeros p)
            }
 
 findZeros :: Integral a => [a] -> a -> [Ratio a]
@@ -30,9 +29,6 @@ findZeros p 0 = []
 findZeros p i
   | p == simplifyPoly p = []
   | otherwise = firstZero p : findZeros (simplifyPoly p) (i - 1)
-
-factor :: Integral a => [a] -> [Ratio a]
-factor p = findZeros p (totalZeros p)
 
 simplifyPoly :: Integral a => [a] -> [a]
 simplifyPoly p
