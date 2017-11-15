@@ -37,7 +37,3 @@ firstZero p = if null p
 
 zeroRem :: Integral a => [a] -> Ratio a -> Bool
 zeroRem p d = (0 % 1) == syntheticRem p d
-
-main = do
-  print $ factorList 15
-  print $ factorList (negate 2)
