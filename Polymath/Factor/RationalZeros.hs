@@ -32,8 +32,8 @@ realZeros p = filter (zeroRem p) (possibleZeros p)
 
 firstZero :: Integral a => [a] -> Ratio a
 firstZero p = if null p
-              then head $ realZeros p
-              else 0 % 1
+              then 0 % 1
+              else head $ realZeros p
 
 zeroRem :: Integral a => [a] -> Ratio a -> Bool
 zeroRem p d = (0 % 1) == syntheticRem p d
