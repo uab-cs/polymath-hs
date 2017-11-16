@@ -34,3 +34,7 @@ simplifyPoly :: Integral a => [a] -> [a]
 simplifyPoly p
   | null (realZeros p) = p
   | otherwise = map ratioToInt (syntheticReduce p (firstZero p))
+
+main = do
+  let p = [15, 14, -3, -2]
+  print $ realZeros p

@@ -23,10 +23,9 @@ varExpo :: GenParser Char st Integer
 varExpo = char 'x' >> (try expo <|> return 1)
 
 monomial :: GenParser Char st (Integer, Integer)
-monomial = do
-  coeff <- num -- <|> return 1
-  deg <- try varExpo <|> return 0
-  return (coeff, deg)
+monomial = try (num >>= (\c -> varExpo >>= \d -> return (c, d)))
+       <|> try (num >>= (\c -> return (c, 0)))
+       <|> try (varExpo >>= (\d -> return (1, d)))
 
 polynomial :: GenParser Char st [(Integer, Integer)]
 polynomial = many1 monomial
